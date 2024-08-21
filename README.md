@@ -86,25 +86,25 @@ Errors are missing.
 The code below was removed from [`DefaultErrorAttributes`](https://github.com/spring-projects/spring-boot/blob/main/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/web/reactive/error/DefaultErrorAttributes.java).
 
 ```java
-	private Throwable determineException(Throwable error) {
-		if (error instanceof ResponseStatusException) {
-			return (error.getCause() != null) ? error.getCause() : error;
-		}
-		return error;
+private Throwable determineException(Throwable error) {
+	if (error instanceof ResponseStatusException) {
+		return (error.getCause() != null) ? error.getCause() : error;
 	}
+	return error;
+}
 ```
 
 This is problematic if the cause is an instance of `BindingResult` as this is no longer true, so the errors aren't added regardless of property value....
 
 ```java
-	private void handleException(Map<String, Object> errorAttributes, Throwable error,
-			MergedAnnotation<ResponseStatus> responseStatusAnnotation, boolean includeStackTrace) {
-		Throwable exception;
-		if (error instanceof BindingResult bindingResult) {
-			errorAttributes.put("message", error.getMessage());
-			errorAttributes.put("errors", bindingResult.getAllErrors());
-			exception = error;
-		}
+private void handleException(Map<String, Object> errorAttributes, Throwable error,
+		MergedAnnotation<ResponseStatus> responseStatusAnnotation, boolean includeStackTrace) {
+	Throwable exception;
+	if (error instanceof BindingResult bindingResult) {
+		errorAttributes.put("message", error.getMessage());
+		errorAttributes.put("errors", bindingResult.getAllErrors());
+		exception = error;
+	}
 ```
 
 ## Questions
