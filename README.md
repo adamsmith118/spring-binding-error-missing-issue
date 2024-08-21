@@ -18,7 +18,7 @@ Full repro [here](https://github.com/adamsmith118/spring-binding-error-missing-i
 @SpringBootApplication
 public class DemoApplication {
 
-	public static void main(String[] args) {
+ public static void main(String[] args) {
     System.setProperty("server.error.include-message", "ALWAYS");
     System.setProperty("server.error.include-binding-errors", "ALWAYS");
 		SpringApplication.run(DemoApplication.class, args);
