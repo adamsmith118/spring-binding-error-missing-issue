@@ -96,7 +96,7 @@ The code below was removed from [`DefaultErrorAttributes`](https://github.com/sp
 
 This is problematic if the cause is an instance of `BindingResult` as this is no longer true, so the errors aren't added regardless of property value....
 
-```json
+```java
 	private void handleException(Map<String, Object> errorAttributes, Throwable error,
 			MergedAnnotation<ResponseStatus> responseStatusAnnotation, boolean includeStackTrace) {
 		Throwable exception;
